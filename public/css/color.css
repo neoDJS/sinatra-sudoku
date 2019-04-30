@@ -19,7 +19,7 @@
       line-height: 18px;
     }
   
-    .wrapper {
+    .container {
       background: #fff;
       -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
       -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
@@ -84,7 +84,7 @@
   }
   
   @media screen and (max-width: 600px) {
-    .wrapper {
+    .container {
       -moz-box-shadow: none;
       -webkit-box-shadow: none;
       box-shadow: none;

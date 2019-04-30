@@ -7,13 +7,14 @@ gem 'rake'
 gem 'require_all'
 gem 'sqlite3',"1.3.13"
 gem 'thin'
-# gem 'shotgun'
+gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
 gem "tux"
-gem 'rerun' 
-gem 'wdm'
+# gem 'rerun' 
+# gem 'wdm'
 # gem 'bootstrap', '~> 4.0.0'
+gem 'sinatra-contrib'
 
 group :test do
   gem 'rspec'

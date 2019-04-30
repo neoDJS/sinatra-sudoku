@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
     has_secure_password
-    validates_presence_of :username, :email, :password
+    validates_presence_of :name, :email, :password
     has_many :grids
   
     def slug
-      self.username.gsub(/\W/, '-')
+      self.name.gsub(/\W/, '-')
     end
   
     def self.find_by_slug(slugified)

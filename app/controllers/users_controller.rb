@@ -10,30 +10,30 @@ class UsersController < ApplicationController
       # if logged_in?
       #   @user= User.find(session[:user_id])
       # else
-        user = User.find_by(:username=>params[:username])
+        user = User.find_by(:name=>params[:user][:name])
       # end
   
       if user && user.authenticate(params[:password])
         session[:user_id] = user.id
   
-        redirect '/tweets'
+        redirect '/sudoku'
       else
         redirect '/login'
       end
     end
   
     get '/signup' do
-      redirect '/tweets' if logged_in?
+      redirect '/sudoku' if logged_in?
   
-      erb :'users/create_user'
+      erb :'users/create'
     end
   
     post '/signup' do
-      user = User.new(:username=>params[:username], :password=>params[:password], :email=>params[:email])
+      user = User.new(params[:user])
       if user.save
         session[:user_id] = user.id
   
-        redirect '/tweets'
+        redirect '/sudoku'
       else
         redirect '/signup'
       end

@@ -1,0 +1,12 @@
+
+table{
+    table-layout: fixed;
+}
+
+table.outer{
+    width: 300px;
+}
+
+table.inner{
+    width: 100px;
+}
