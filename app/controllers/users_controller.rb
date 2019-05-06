@@ -1,17 +1,14 @@
 class UsersController < ApplicationController
 
     get '/login' do
-      redirect '/index' if logged_in?
+      redirect '/sudoku' if logged_in?
   
       erb :'users/login'
     end
   
     post '/login' do
-      # if logged_in?
-      #   @user= User.find(session[:user_id])
-      # else
-        user = User.find_by(:name=>params[:user][:name])
-      # end
+
+      user = User.find_by(:name=>params[:user][:name])
   
       if user && user.authenticate(params[:password])
         session[:user_id] = user.id

@@ -1,12 +1,16 @@
-
-table{
+table {
     table-layout: fixed;
 }
 
-table.outer{
+table.outer {
     width: 300px;
 }
 
-table.inner{
+table.inner {
     width: 100px;
+}
+
+.entry {
+    display: none;
+    float: right;
 }

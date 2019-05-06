@@ -14,20 +14,21 @@
 ActiveRecord::Schema.define(version: 20190430034116) do
 
   create_table "boxes", force: :cascade do |t|
-    t.string   "line"
-    t.string   "column"
-    t.string   "value"
-    t.string   "creator"
+    t.integer  "bloc"
+    t.integer  "line"
+    t.integer  "column"
+    t.integer  "value"
+    t.string   "creator",    default: "User"
     t.integer  "grid_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "grids", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "complexity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "complexity", default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "users", force: :cascade do |t|

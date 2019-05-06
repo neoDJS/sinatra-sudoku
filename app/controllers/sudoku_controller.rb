@@ -1,38 +1,44 @@
 class SudokuController < ApplicationController
 
-    get '/index' do
-  
+    get '/sudoku' do
+      redirect '/login' unless logged_in?
+      
+      @userGames = current_user.grids
       erb :'sudoku/index'
     end
 
     get '/sudoku/new' do
-  
-      erb :'sudoku/new'
+      redirect '/login' unless logged_in?
+
+      sudoku = Grid.new(user_id: current_user.id)
+      if sudoku.save
+        redirect "/sudoku/#{sudoku.id}"
+      else
+        @error = sudoku.errors
+        erb :error
+      end
     end  
 
-    post '/sudoku' do
-  
-      erb :'sudoku/new'
-    end  
+    get '/sudoku/:id' do 
+      redirect '/login' unless logged_in?
 
-    get '/sudoku/:id' do #partie complete
-  
-      erb :'sudoku/new'
-    end  
-
-    get '/sudoku/:id/edit' do #partie non complete
-  
-      erb :'sudoku/new'
-    end  
+      @sudoku = Grid.find_by({user_id:current_user.id, id:prams[:id]})
+      session[:grid_id] = @sudoku.id
+      erb :'sudoku/show'
+    end 
 
     patch '/sudoku/:id' do 
-  
-      erb :'sudoku/new'
+      redirect '/login' unless logged_in?
+
+      @sudoku = Grid.find_by({user_id:current_user.id, id:prams[:id]})
+      redirect "/sudoku/#{sudoku.id}"
     end  
 
     delete '/sudoku/id' do
-  
-      erb :'sudoku/new'
+      redirect '/login' unless logged_in?
+
+      @sudoku = Grid.find_by({user_id:current_user.id, id:prams[:id]})
+      redirect "/sudoku"
     end  
   
   end
