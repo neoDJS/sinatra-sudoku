@@ -22,7 +22,7 @@ class SudokuController < ApplicationController
     get '/sudoku/:id' do 
       redirect '/login' unless logged_in?
 
-      @sudoku = Grid.find_by({user_id:current_user.id, id:prams[:id]})
+      @sudoku = Grid.find_by({user_id:current_user.id, id:params[:id]})
       session[:grid_id] = @sudoku.id
       erb :'sudoku/show'
     end 
@@ -30,14 +30,15 @@ class SudokuController < ApplicationController
     patch '/sudoku/:id' do 
       redirect '/login' unless logged_in?
 
-      @sudoku = Grid.find_by({user_id:current_user.id, id:prams[:id]})
+      @sudoku = Grid.find_by({user_id:current_user.id, id:params[:id]})
       redirect "/sudoku/#{sudoku.id}"
     end  
 
     delete '/sudoku/id' do
       redirect '/login' unless logged_in?
+      session.delete(:grid_id)
 
-      @sudoku = Grid.find_by({user_id:current_user.id, id:prams[:id]})
+      @sudoku = Grid.find_by({user_id:current_user.id, id:params[:id]})
       redirect "/sudoku"
     end  
   

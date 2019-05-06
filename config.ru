@@ -6,7 +6,7 @@ end
 
 # run CoursesController.new
 use Rack::MethodOverride
-use SudokuController
 use BoxesController
+use SudokuController
 use UsersController
 run ApplicationController

@@ -33,39 +33,4 @@ class Box < ActiveRecord::Base
             end
         end
     end
-
-    # def isBoxValid?
-    #     valide = true
-        
-    #     if(self.line < 0 || self.line > 8)
-    #         valide = false
-    #         puts "Erreur ligne#{self.line}, la ligne doit être comprise entre 1 - 9."
-    #     elsif(self.column < 0 || self.column > 8)
-    #         valide = false
-    #         puts "Erreur colonne#{self.column}, la colonne doit être comprise entre 1 - 9."
-    #     elsif(self.value < 1 || self.value > 9)
-    #         valide = false
-    #         puts "Erreur valeur#{self.value}, la valeur doit être comprise entre 1 - 9."
-    #     end
-                
-    #     return valide;
-    # end
-    
-    def as_json
-      {
-          bloc: 	@bloc,
-          line: 	@line,
-          column: 	@column,
-          value:	@value,
-          userSystem:	@creator
-      }
-    end
-    
-    def to_json(*option)
-        as_json.to_json(*option)
-    end
-
-    # def toString() 
-    #     return "#{line} #{column} #{value}";
-    # end
 end

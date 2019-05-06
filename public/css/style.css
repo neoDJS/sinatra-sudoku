@@ -32,6 +32,10 @@ body {
     padding-top: 5px;
 }
 
+.bck-white {
+    background: #fff;
+}
+
 .wrapper {
     background: #fff;
     /* margin: 26px auto; */

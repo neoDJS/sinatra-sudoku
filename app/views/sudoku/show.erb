@@ -9,7 +9,7 @@
             <button class="nav-link btn btn-lg btn-primary" id="clear">Clear Current Game</button>
         </div>
         <div class="wrapper shadow">
-            <%= erb :grid, :locals => {:sudoku => @sudoku} %>
+            <%= erb :'sudoku/grid', :locals => {:sudoku => @sudoku} %>
 
 
             <div id="games"></div>
@@ -21,4 +21,3 @@
 
 
 
-<script src="js/sudoku.js"> </script>

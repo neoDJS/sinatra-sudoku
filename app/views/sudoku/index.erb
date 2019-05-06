@@ -10,11 +10,11 @@
 			</div>
 			<div class="wrapper shadow"> <!-- .container -->
 				<% if @userGames.empty? %>
-					<div><div disable><%= erb :instructions %></div>
+					<div><%= erb :'sudoku/instructions' %></div>
 				<% else %>
 					<div id="games">
 						<% @userGames.each do |game| %>
-							<a href="/sudoku/<%= game.id %>"><div disable><%= erb :grid, :locals => {:sudoku => game} %></div></a>
+							<a href="/sudoku/<%= game.id %>"><div disable><%= erb :'sudoku/grid', :locals => {:sudoku => game} %></div></a>
 						<% end %>
 					</div>
 				<% end %>
