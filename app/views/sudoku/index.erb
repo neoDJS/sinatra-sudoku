@@ -4,7 +4,7 @@
 	<div class="container pad-top-20">
 		<div class="row">
 			<div class="menu nav flex-column">
-				<a class="nav-link btn btn-md btn-primary" id="new" href="#/sudoku/new">New Game</a>
+				<a class="nav-link btn btn-md" id="new" href="#/sudoku/new">New Game</a>
 				<a class="nav-link btn btn-md btn-primary" id="clear" href="/sudoku/clear">Clear History</a>
 				<a href="#" class="nav-link btn btn-secondary" id="previous">Show Previous Games</a>
 			</div>
@@ -12,12 +12,16 @@
 				<% if @userGames.empty? %>
 					<div><%= erb :'sudoku/instructions' %></div>
 				<% else %>
-					<div id="games">
+					<a href="/sudoku/<%= @userGames.first.id %>"><div class="pop-hide"><%= erb :'sudoku/grid', :locals => {:sudoku => @userGames.first} %></div></a>
+				<% end %>
+
+				<div id="games">
+					<div id="mx-auto">
 						<% @userGames.each do |game| %>
-							<a href="/sudoku/<%= game.id %>"><div disable><%= erb :'sudoku/grid', :locals => {:sudoku => game} %></div></a>
+							<a class="btn btn-sm" href="#"><%= game.id %></a>
 						<% end %>
 					</div>
-				<% end %>
+				</div>
 
 				<div id="message"></div>
 			</div>

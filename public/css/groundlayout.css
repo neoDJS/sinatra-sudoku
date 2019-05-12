@@ -1,16 +1,52 @@
 table {
+    /* letter-spacing: 1px;
+    font-size: .8rem; */
     table-layout: fixed;
 }
 
 table.outer {
-    width: 300px;
+    width: 63.07%;
+    height: 91.81%;
 }
 
 table.inner {
-    width: 100px;
+    width: 100%;
+    height: 100%;
 }
 
-.entry {
+#entries {
     display: none;
     float: right;
 }
+
+.entry:hover {
+    background-color: aqua;
+    border-radius: 5px;
+    /* width: 80%; */
+    transition: all 0.3s ease 0s;
+}
+
+table.inner td {
+    padding: 10px 20px;
+}
+
+table.inner td:empty {
+    padding: 30px;
+}
+
+table.inner td:hover {
+    background-color: cyan;
+}
+
+table.inner td:active {
+    background-color: darkcyan;
+}
+
+
+/* 
+table.inner td:visited {
+    background-color: darkcyan;
+} */
+
+
+/* border: 4px solid #20bf6b !important; */

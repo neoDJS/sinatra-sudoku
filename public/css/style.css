@@ -22,8 +22,20 @@ body {
     padding-right: 30px;
 }
 
+.pad-top-10 {
+    padding-top: 10px;
+}
+
 .pad-top-20 {
     padding-top: 20px;
+}
+
+.pad-top-30 {
+    padding-top: 30px;
+}
+
+.pad-top-40 {
+    padding-top: 40px !important;
 }
 
 .menu {
@@ -36,12 +48,17 @@ body {
     background: #fff;
 }
 
+.wrap {
+    max-width: 960px;
+    width: 80%;
+}
+
 .wrapper {
     background: #fff;
     /* margin: 26px auto; */
     max-width: 960px;
     padding: 2.25%;
-    height: 38em;
+    /* height: 39em; */
     /* 18px / 800px */
     width: 80%;
 }

@@ -1,10 +1,13 @@
-<div class="container bck-white mx-auto">
+<div class="container bck-white pad-top-20">
   <h1>New Account</h1>
 
-  <form action="/signup" method="post">
-    <p class="text-justify">Username: <input type="text" name="user[name]" id="usernameS"></p>
-    <p class="text-justify">Email: <input type="email" name="user[email]" id="emailS"></p>
-    <p class="text-justify">Password: <input type="password" name="user[password]" id="passwordS"></p>
-    <p class="text-justify"><input type="submit" id="submitS" value="Create"></p>
+  <form class="row" action="/signup" method="post">
+    <div class="wrap col mx-auto">
+      <p class="row"><label class="col-3">User Name:</label> <input class="col ml-2" type="text" name="user[name]" id="usernameS"></p>
+      <p class="row"><label class="col-3">Email:</label> <input class="col ml-2" type="email" name="user[email]" id="emailS"></p>
+      <p class="row"><label class="col-3">Password:</label> <input class="col ml-2" type="password" name="user[password]" id="passwordS"></p>
+      <p class="row"><input class="col-4 mx-auto" type="submit" id="submitS" value="Create"></p>
+      <p class="row invisible"></p>
+    </div>
   </form>
 </div>

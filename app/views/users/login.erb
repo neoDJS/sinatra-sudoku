@@ -1,9 +1,12 @@
-<div class="container bck-white">
+<div class="container bck-white pad-top-20">
   <h1>Sign In</h1>
 
-  <form action="/login" method="post">
-    <p class="text-justify">Username: <input type="text" name="user[name]" id="usernameL"></p>
-    <p class="text-justify">Password: <input type="password" name="user[password]" id="passwordL"></p>
-    <p class="text-justify"><input type="submit" id="submitL" value="Log In"></p>
+  <form class="row" action="/login" method="post">
+    <div class="wrap col mx-auto">
+      <p class="row text-justify"><label class="col-2">Email:</label> <input class="col ml-2" type="email" name="user[email]" id="emailL"></p>
+      <p class="row text-justify"><label class="col-2">Password:</label> <input class="col ml-2" type="password" name="user[password]" id="passwordL"></p>
+      <p class="row text-justify"><input class="col-4 mx-auto" type="submit" id="submitL" value="Log In"></p>
+      <p class="row invisible"></p>
+    </div>
   </form>
 </div>

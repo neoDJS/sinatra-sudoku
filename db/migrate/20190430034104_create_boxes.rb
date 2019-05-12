@@ -6,7 +6,7 @@ class CreateBoxes < ActiveRecord::Migration
       t.integer :column
       t.integer :value
       t.string :creator, default: "User"
-      t.integer :grid_id
+      t.belongs_to :grid # t.references :grid, foreign_key: true, index: true
       t.timestamps null: false
     end
   end
