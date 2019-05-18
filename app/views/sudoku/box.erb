@@ -1,4 +1,4 @@
-<td tabindex="0" data-toggle="popover" 
+<td <% if box.creator == "User" %> tabindex="0" data-toggle="popover" <% end %>
 data-id="<%= box.id %>" 
 data-bloc="<%= box.bloc %>" 
 data-x="<%= box.line %>" 

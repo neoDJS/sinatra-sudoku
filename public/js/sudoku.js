@@ -1,5 +1,4 @@
 // Code your JavaScript / jQuery solution here
-'use strict';
 let gameId;
 let selectedCase;
 let entrySelector;
@@ -10,7 +9,7 @@ $(document).ready(function() {
 });
 
 function setMessage(value) {
-    $('div#message').text(value);
+    $('div#message').append(value);
 }
 
 function reset() {
@@ -43,9 +42,10 @@ function attachListeners() {
 
 function updateState(event) {
     let data = {
-        // id: $(selectedCase).data("id"),
+        id: $(selectedCase).data("id"),
         line: $(selectedCase).data("x"),
-        column: $(selectedCase).data("y")
+        column: $(selectedCase).data("y"),
+        bloc: $(selectedCase).data("bloc")
     };
 
     if ($(this).attr("class") == "blank") {
@@ -56,24 +56,31 @@ function updateState(event) {
 
     $(selectedCase).text(data.value);
 
-    // var posting = $.ajax({
-    //     type: 'PATCH',
-    //     url: `/boxes/${$(selectedCase).data("id")}`,
-    //     data: data
-    // });
-    // posting.done(function(game) {
-    //     // TODO: handle response
-    //     gameId = game.data.id;
-    // });
-    // posting.fail(function(game) {
-    //     // TODO: handle response
-    //     gameId = game.data.id;
-    // });
+    var posting = $.ajax({
+        type: 'PATCH',
+        url: `/boxes/${data.id}`,
+        data: data
+    });
+    posting.done(function(game) {
+        // TODO: handle response
+        // $("p").toggleClass("main");
+        if (game.errors) {
+            Object.keys(game.errors).forEach((key) => errorsEffect(key, data));
+            console.log("error");
+        }
+    });
+    posting.fail(function(game) {
+        // TODO: handle response
+        // Object.keys(game.errors).forEach((key) => errorsEffect(key, data));
+        // $("p").toggleClass(`error-${game.errors}`);
+        // setMessage(game.responseText);
+        console.log("fail");
+        console.log(game.responseText);
+    });
     console.log("this2 :");
     console.log(this);
-    $('.popover-body a').off('click');
     $(selectedCase).popover('hide');
-    selectCase = null;
+    // selectedCase = null;
 }
 
 function selectCase(event) {
@@ -83,7 +90,7 @@ function selectCase(event) {
     console.log("this1 :");
     console.log(this);
     // entrySelector = `#${$(selectedCase).attr("aria-describedby")} div.entry`;
-    $(document.body).on('click', '.popover-body a', updateState);
+    $('.popover').on('click', '.popover-body a', updateState);
 }
 
 function clearGame(event) {
@@ -91,3 +98,24 @@ function clearGame(event) {
 }
 
 function cleanBackwardAction() {}
+
+function errorsEffect(errorKey, data) {
+    let elem;
+    switch (errorKey) {
+        case "line":
+            elem = `.inner [data-x=${data.line}]`;
+            // $("p").toggleClass(`error-${errorKey}`);
+            break;
+        case "column":
+            elem = `.inner [data-y=${data.column}]`;
+            break;
+        case "bloc":
+            elem = `[data-mbloc=${data.bloc}]`;
+            break;
+        default:
+            break;
+    }
+    $(elem).toggleClass(`error-${errorKey}`);
+    setTimeout(() => $(elem).toggleClass(`error-${errorKey}`), 10000);
+    console.log("Elem : " + elem);
+}

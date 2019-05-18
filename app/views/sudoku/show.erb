@@ -5,10 +5,12 @@
     <div class="row">
         <div class="menu nav flex-column">
             <a class="nav-link btn btn-lg btn-primary" id="renew" href="/sudoku/restart">Restart Game</a>
+            <a class="nav-link btn btn-lg btn-primary" id="new" href="/sudoku/new">New Game</a>
             <a class="nav-link btn btn-lg btn-primary" id="delete" href="#">Delete Game</a>
             <!--a class="nav-link btn btn-lg btn-primary" id="clear" href="#">Clear Current Game</a-->
         </div>
         <div class="wrapper shadow">
+            <div class="gear"><i class="fas fa-cog fa-2x"></i></div>
             <%= erb :'sudoku/grid', :locals => {:sudoku => @sudoku} %>
 
 

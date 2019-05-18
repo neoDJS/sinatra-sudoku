@@ -1,3 +1,13 @@
+.gear {
+    position: relative;
+    top: 5%;
+    left: 93%;
+}
+
+.gear i:hover {
+    color: cyan;
+}
+
 table {
     /* letter-spacing: 1px;
     font-size: .8rem; */
@@ -27,19 +37,37 @@ table.inner {
 }
 
 table.inner td {
-    padding: 10px 20px;
+    padding: 10px 25px;
 }
 
 table.inner td:empty {
     padding: 30px;
 }
 
-table.inner td:hover {
+table.inner td[data-toggle=popover]:hover {
     background-color: cyan;
 }
 
-table.inner td:active {
-    background-color: darkcyan;
+table.inner td[data-toggle=popover]:active {
+    background-color: DarkTurquoise;
+}
+
+td.error-line {
+    -webkit-box-shadow: 0px 0px 20px 10px #ff0000;
+    -moz-box-shadow: 0px 0px 20px 10px #ff0000;
+    box-shadow: 0px 0px 20px 10px #ff0000;
+}
+
+td.error-column {
+    -webkit-box-shadow: 0px 0px 20px 10px #ff0000;
+    -moz-box-shadow: 0px 0px 20px 10px #ff0000;
+    box-shadow: 0px 0px 20px 10px #ff0000;
+}
+
+td.error-bloc {
+    -webkit-box-shadow: 0px 0px 20px 10px #ff0000;
+    -moz-box-shadow: 0px 0px 20px 10px #ff0000;
+    box-shadow: 0px 0px 20px 10px #ff0000;
 }
 
 

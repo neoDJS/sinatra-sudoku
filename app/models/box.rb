@@ -7,12 +7,12 @@ class Box < ActiveRecord::Base
     validates  :value, inclusion: 1..9, allow_nil: true
     validate :isInTheBloc?, :isInTheColumn?, :isInTheLine?, on: :update
     before_validation(on: :update) do
-        self.value = nil if self.value == ''
+        self.value = nil if self.value == ""
       end
 
     def isInTheLine?
         self.grid.boxes.select{|b| b.line == self.line}.each do |b|
-            if((b.column != self.column) && (b.value == self.value))
+            if((self.value != nil) && (b.column != self.column) && (b.value == self.value))
                 errors.add(:line, "Already on this line");
             end
         end
@@ -20,7 +20,7 @@ class Box < ActiveRecord::Base
 
     def isInTheColumn?
         self.grid.boxes.select{|b| b.column == self.column}.each do |b|
-            if((b.line != self.line) && (b.column != self.column) && (b.value == self.value))
+            if((self.value != nil) && (b.line != self.line) && (b.value == self.value))
                 errors.add(:column, "Already on this column");
             end
         end
@@ -28,7 +28,7 @@ class Box < ActiveRecord::Base
 
     def isInTheBloc?
         self.grid.boxes.select{|b|  b.bloc == self.bloc}.each do |b|            
-            if((b.line != self.line) && (b.value == self.value))
+            if((self.value != nil) && (b.line != self.line) && (b.column != self.column) && (b.value == self.value))
                 errors.add(:bloc, "Already on this bloc")
             end
         end
