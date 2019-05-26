@@ -17,7 +17,6 @@ function reset() {
     $('td').empty();
     $('#games').empty();
     $('#message').empty();
-    // console.log(turn);
 }
 
 function attachListeners() {
@@ -67,12 +66,14 @@ function updateState(event) {
         if (game.errors) {
             Object.keys(game.errors).forEach((key) => errorsEffect(key, data));
             console.log("error");
+
+            $(selectedCase).toggleClass('error');
+        } else {
+            sanitize();
         }
     });
     posting.fail(function(game) {
         // TODO: handle response
-        // Object.keys(game.errors).forEach((key) => errorsEffect(key, data));
-        // $("p").toggleClass(`error-${game.errors}`);
         // setMessage(game.responseText);
         console.log("fail");
         console.log(game.responseText);
@@ -104,7 +105,6 @@ function errorsEffect(errorKey, data) {
     switch (errorKey) {
         case "line":
             elem = `.inner [data-x=${data.line}]`;
-            // $("p").toggleClass(`error-${errorKey}`);
             break;
         case "column":
             elem = `.inner [data-y=${data.column}]`;
@@ -115,7 +115,15 @@ function errorsEffect(errorKey, data) {
         default:
             break;
     }
+
     $(elem).toggleClass(`error-${errorKey}`);
-    setTimeout(() => $(elem).toggleClass(`error-${errorKey}`), 10000);
+    // setTimeout(() => $(elem).toggleClass(`error-${errorKey}`), 10000);
     console.log("Elem : " + elem);
+}
+
+function sanitize() {
+    $('.error').toggleClass('error');
+    $('.error-line').toggleClass('error-line');
+    $('.error-column').toggleClass('error-column');
+    $('.error-bloc').toggleClass('error-bloc');
 }

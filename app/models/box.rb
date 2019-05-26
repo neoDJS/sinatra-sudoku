@@ -8,7 +8,7 @@ class Box < ActiveRecord::Base
     validate :isInTheBloc?, :isInTheColumn?, :isInTheLine?, on: :update
     before_validation(on: :update) do
         self.value = nil if self.value == ""
-      end
+    end
 
     def isInTheLine?
         self.grid.boxes.select{|b| b.line == self.line}.each do |b|
