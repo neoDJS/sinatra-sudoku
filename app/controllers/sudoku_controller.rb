@@ -19,6 +19,18 @@ class SudokuController < ApplicationController
       end
     end  
 
+    get '/sudoku/:id/renew' do
+      redirect '/login' unless logged_in?
+
+      sudoku = Grid.find_by({user_id:current_user.id, id:params[:id]})
+      if sudoku.reset
+        redirect "/sudoku/#{sudoku.id}"
+      else
+        @error = sudoku.errors
+        erb :error
+      end
+    end  
+
     get '/sudoku/:id' do 
       redirect '/login' unless logged_in?
 
@@ -34,7 +46,7 @@ class SudokuController < ApplicationController
       redirect "/sudoku/#{sudoku.id}"
     end  
 
-    delete '/sudoku/id' do
+    delete '/sudoku/:id' do
       redirect '/login' unless logged_in?
       session.delete(:grid_id)
 
