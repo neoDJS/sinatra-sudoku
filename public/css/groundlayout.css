@@ -8,9 +8,10 @@
     color: cyan;
 }
 
-table {
-    /* letter-spacing: 1px;
-    font-size: .8rem; */
+
+/* table {
+    / * letter-spacing: 1px;
+    font-size: .8rem; * /
     table-layout: fixed;
 }
 
@@ -22,7 +23,7 @@ table.outer {
 table.inner {
     width: 100%;
     height: 100%;
-}
+} */
 
 #entries {
     display: none;
@@ -37,11 +38,16 @@ table.inner {
 }
 
 table.inner td {
-    padding: 10px 25px;
+    padding: 21px 26px;
 }
 
 table.inner td:empty {
     padding: 30px;
+}
+
+table.inner td[data-toggle=popover] {
+    color: blue;
+    /* border-block-color: black; */
 }
 
 table.inner td[data-toggle=popover]:hover {

@@ -1,7 +1,8 @@
 class Grid < ActiveRecord::Base
     has_many :boxes
     belongs_to :user
-    before_save :init
+    before_create :init
+    after_create :generateValue
     validates :complexity, inclusion: 0..8
 
     def init
@@ -18,48 +19,31 @@ class Grid < ActiveRecord::Base
     end
 
     def generateValue
-        allValues = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-        alredySet = []
+        # allValues = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        # alredySet = []
         # a = [1,2,3,4,5,6,7,8,9]
         # b = [2,4,5,6,8]
         # c = a-b
         # c.sample
-        caseToInit = 8 - self.complexity;
+        caseToInit = (81 - 9*self.complexity)/3;#8;#
 
-        caseToInit.times do |i|            
-            alredySet << generatedValue = (allValues - alredySet).sample;
-            9.times do |bi| # bi pour bloc indice
-                bloc = self.boxes.select{|b|  (b.bloc == bi) && (b.value.nil?)};
-                # blocValues = bloc.map(&:value);
-                ash = selectCase(bloc, caseToInit, generatedValue);
-                # generatedValue = (allValues - blocValues - ash[:lineValues] - ash[:colValues]).sample;
-                ash[:box].update({value: generatedValue, creator: "System"})
-            end
+        caseToInit.times do |i|         
+            box = self.boxes.select{|b| b.value.nil? }.sample;  
+            setCaseValue(box);
+            box2 = self.boxes.find{|b| (b.line == (8-box.line)) && (b.column == (8-box.column)) };
+            setCaseValue(box2);
         end
     end
 
-    def selectCase(bloc, numbCase, val)
-        completed = valid = false;
-        ash = {};
-        while((!completed) || (!valid)) do
-            ash[:box] = bloc.sample;
-            line = self.boxes.select{|b| (b.line == ash[:box].line) && (b.column != ash[:box].column) && (!b.value.nil?)};
-            valid = line.all?{|b| b.value != val};
-            # ash[:lineValues] = line.map(&:value);
-            # lineCount = line.select{|b| !b.value.nil? }.count;
-            if valid
-                lineCount = line.count;
-                col = self.boxes.select{|b| (b.column == ash[:box].column) && (b.line != ash[:box].line) && (!b.value.nil?)};
-                valid = col.all?{|b| b.value != val};
-                # ash[:colValues] = col.map(&:value);
-                # colCount = col.select{|b| !b.value.nil? }.count;
-                if valid
-                    colCount = col.count
-                    completed = ((numbCase - colCount) > 0) && ((numbCase - lineCount) > 0);
-                end
-            end
-        end
-        ash
+    def setCaseValue(box)
+        allValues = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+        neighbors = self.boxes.select{|b| ((b != box) && (!b.value.nil?)) && 
+                                        ((b.line == box.line) || (b.column == box.column) || (b.bloc == box.bloc))};
+        neighborsValue = neighbors.map(&:value);
+
+        generatedValue = (allValues - neighborsValue).sample
+        box.update({value: generatedValue, creator: "System"})
     end
 
     def reset
